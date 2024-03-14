@@ -11,7 +11,10 @@ import SvgIcon from '@/components/SvgIcon'
  */
 export const getBreadcrumbNameMap = (routes) => {
   //首先拼接上首页
-  const list = [{ path: 'home', menuPath: '/home', title: '首页' }, ...routes]
+  const list = [
+      { path: 'home', menuPath: '/home', title: '首页' },
+    {path: 'asset', menuPath: '/asset', title: 'Asset'},
+    ...routes]
   let breadcrumbNameObj = {}
   const getItems = (list) => {
     //先遍历数组

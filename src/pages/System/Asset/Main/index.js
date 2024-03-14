@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import CustomTable from "../../../components/CustomTable";
+import CustomTable from "../../../../components/CustomTable";
 import {Button, Space, Tag} from "antd";
-import apiMap from "../../../api/asset";
-import Link from "antd/es/typography/Link";
+import apiMap from "../../../../api/asset";
+import {Route, Routes} from "react-router-dom"
+import AssetCreate from "../Create";
 
 const columns = [
   {
@@ -72,15 +73,26 @@ const Asset = () => {
       setRequestParam({...requestParam, ...searchParams})
     }
   }
+
+  const handleClick = () => {
+    window.open('/asset/create', '_blank');
+  };
   return (
       <div>
-
         <h1>Asset Table</h1>
-        <Link to='/asset/create'>
-          <Button className="enroll_btn" size="small">Create Asset</Button>
-        </Link>
 
 
+        <Routes>
+          <Route path='/asset/create' element={<AssetCreate/>}/>
+        </Routes>
+
+        <Button className="enroll_btn" size="small"
+                onClick={handleClick}>Create
+          Asset</Button>
+
+        {/*<Link to='/asset/create'>*/}
+        {/*  <Button className="enroll_btn" size="small">Create Asset</Button>*/}
+        {/*</Link>*/}
         <CustomTable
             columns={columns}
             fetchMethod={apiMap.table.get}

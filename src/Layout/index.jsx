@@ -1,17 +1,27 @@
-import React, { useState, useRef, useMemo, useCallback, lazy } from 'react'
+import React, {lazy, useCallback, useMemo, useRef, useState} from 'react'
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   DashboardFilled,
   DownOutlined,
-  UserOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   UndoOutlined,
-  LogoutOutlined
+  UserOutlined
 } from '@ant-design/icons'
-import { Layout, Menu, Button, theme, Switch, Dropdown, Space, Popconfirm, Breadcrumb } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '@/store/reducers/userSlice'
-import { useNavigate, Link, useLocation } from 'react-router-dom'
+import {
+  Breadcrumb,
+  Button,
+  Dropdown,
+  Layout,
+  Menu,
+  Popconfirm,
+  Space,
+  Switch,
+  theme
+} from 'antd'
+import {useDispatch, useSelector} from 'react-redux'
+import {logout} from '@/store/reducers/userSlice'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
 // 导入css（未模块化）
 import './Layout.scss'
 // 导入自定义组件
@@ -21,18 +31,23 @@ import UserCenterForm from './components/UserCenterForm'
 import ResetPwdForm from './components/ResetPwdForm'
 import SvgIcon from '@/components/SvgIcon'
 // 导入工具类方法
-import { getBreadcrumbNameMap, getItem, getTreeMenu } from '@/utils/common'
+import {getBreadcrumbNameMap, getItem, getTreeMenu} from '@/utils/common'
+import Asset from "../pages/System/Asset/Main";
 
-const { Header, Sider, Content } = Layout
+const {Header, Sider, Content} = Layout
 // 提取底层路由方法
 const getMenus = (routes) => {
   let menus = []
+
   function getMenuItem(route) {
     route.forEach((item) => {
-      if (item.children && item.children.length) getMenuItem(item.children)
-      else {
+      if (item.children && item.children.length) {
+        getMenuItem(item.children)
+      } else {
         // 排除默认路由
-        if (item.path) menus.push(item)
+        if (item.path) {
+          menus.push(item)
+        }
       }
     })
   }
@@ -63,9 +78,14 @@ const LayoutApp = () => {
   const menuItems = useMemo(() => {
     return [
       getItem(
-        <Link to="/home">首页</Link>,
-        '/home',
-        <SvgIcon name="component" width="14" height="14" color="#ccc"></SvgIcon>
+          <Link to="/home">首页</Link>,
+          '/home',
+          <SvgIcon name="component" width="14" height="14" color="#ccc"/>
+      ),
+      getItem(
+          <Link to="/asset">Asset</Link>,
+          '/asset',
+          <SvgIcon name="component" width="14" height="14" color="#ccc"/>
       )
     ].concat(getTreeMenu(permissionRoutes))
   }, [permissionRoutes])
@@ -105,7 +125,9 @@ const LayoutApp = () => {
   // 格式化路由数组
   const Home = lazy(() => import('@/pages/Home'))
   const formatRoutes = useMemo(() => {
-    return [{ title: '首页', menuPath: '/home', element: <Home /> }].concat(getMenus(permissionRoutes))
+    return [{title: '首页', menuPath: '/home', element: <Home/>},
+      {title: 'Asset', menuPath: '/asset', element: <Asset/>}].concat(
+        getMenus(permissionRoutes))
   }, [permissionRoutes])
   // 用户头像
   const avatar = useSelector((state) => state.user.userinfo.avatar)

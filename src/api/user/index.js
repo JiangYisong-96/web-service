@@ -29,14 +29,14 @@ export default apiMap
 // 获取图形验证码
 function getCheckCode(uuid) {
   return request({
-    url: '/user/checkCode?uuid=' + uuid,
+    url: '/service-content/user/checkCode?uuid=' + uuid,
     method: 'get'
   })
 }
 // 刷新过期token
 function refreshToken() {
   return request({
-    url: '/user/refreshToken',
+    url: '/service-content/user/refreshToken',
     method: 'post',
     data: { refreshToken: getRefreshToken() }
   })
@@ -44,14 +44,14 @@ function refreshToken() {
 // 添加用户登录请求
 function userLogin(form) {
   return request({
-    url: '/user/login',
+    url: '/service-content/user/login',
     method: 'post',
     data: form
   })
 }
 function listUser(params) {
   return request({
-    url: '/user/list',
+    url: '/service-content/user/list',
     method: 'get',
     params: params
   })
@@ -59,7 +59,7 @@ function listUser(params) {
 
 function addUser(form) {
   return request({
-    url: '/user/addUser',
+    url: '/service-content/user/addUser',
     method: 'post',
     data: form
   })
@@ -67,7 +67,7 @@ function addUser(form) {
 
 function updateUser(form) {
   return request({
-    url: '/user/editUser/' + form.user_id,
+    url: '/service-content/user/editUser/' + form.user_id,
     method: 'post',
     data: form
   })
@@ -75,7 +75,7 @@ function updateUser(form) {
 
 function delUser(ids) {
   return request({
-    url: '/user/delUser',
+    url: '/service-content/user/delUser',
     method: 'post',
     data: ids
   })
@@ -83,7 +83,7 @@ function delUser(ids) {
 
 function updatePwd(form) {
   return request({
-    url: `/user/editPwd`,
+    url: `/service-content/user/editPwd`,
     method: 'post',
     data: form
   })
@@ -91,20 +91,20 @@ function updatePwd(form) {
 // 根据id获取用户数据
 function getUserById(user_id) {
   return request({
-    url: `/user/queryUserInfo/${user_id}`,
+    url: `/service-content/user/queryUserInfo/${user_id}`,
     method: 'get'
   })
 }
 
 function getUserInfo() {
   return request({
-    url: '/user/myInfo/userinfo',
+    url: '/service-content/user/myInfo/userinfo',
     method: 'get'
   })
 }
 function updateUserInfo(userinfo) {
   return request({
-    url: '/user/myInfo/updateUserinfo',
+    url: '/service-content/user/myInfo/updateUserinfo',
     method: 'post',
     data: userinfo
   })

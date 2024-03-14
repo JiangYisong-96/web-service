@@ -1,6 +1,6 @@
 import React from 'react';
 
-const createPage = () => {
+const AssetCreate = () => {
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -13,6 +13,7 @@ const createPage = () => {
   // };
 
   return (
+
       <div>
         <h1>Asset Create</h1>
         {/*<form onSubmit={handleSubmit}>*/}
@@ -35,6 +36,7 @@ const createPage = () => {
         {/*</form>*/}
       </div>
   );
+ 
 };
 
-export default createPage;
+export default AssetCreate;
